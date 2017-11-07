@@ -33,10 +33,12 @@ function VideoConverter(options) {
             console.log('Spawned Ffmpeg with command: ' + commandLine);
         });
         var match;
-        if (match = size.match(/(\d+)x(\d+)/)) {
-            ffm.addOutputOptions("-vf", scale(match[1], match[2]));
-        } else {
-            ffm.size(size);
+        if (size) {
+            if (match = size.match(/(\d+)x(\d+)/)) {
+                ffm.addOutputOptions("-vf", scale(match[1], match[2]));
+            } else {
+                ffm.size(size);
+            }            
         }
         ffm.output(output);
 
